@@ -14,7 +14,6 @@ mod twitch;
 
 fn main() -> anyhow::Result<()> {
     simple_env_load::load_env_from([".secrets.env", ".dev.env"]);
-
     let config = twitch::Config::from_env()?;
 
     anathema::core::Factory::register("tab", tab::TabFactory)?;
@@ -25,13 +24,7 @@ fn main() -> anyhow::Result<()> {
     let handle = std::thread::spawn(move || twitch::connect(config, req_rx, resp_tx));
 
     let root_view = root_view::RootView {
-        state: root_view::RootState {
-            status: StateValue::default(),
-            our_user: StateValue::default(),
-            input: StateValue::default(),
-            channels: List::empty(),
-            output: List::empty(),
-        },
+        state: root_view::RootState::default(),
         tabs: Tabs::default(),
         feed: resp_rx,
         send: req_tx.clone(),

@@ -6,7 +6,7 @@ use smol::channel::{Receiver, Sender};
 
 use crate::{display_channel::DisplayChannel, geometry::pos2, model, tab, tabs::Tabs, twitch};
 
-#[derive(Debug, anathema::values::State)]
+#[derive(Debug, Default, anathema::values::State)]
 pub struct RootState {
     pub status: StateValue<String>,
     pub our_user: StateValue<model::AnaUser>,
