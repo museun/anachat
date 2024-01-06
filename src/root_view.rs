@@ -4,7 +4,7 @@ use anathema::{
 };
 use smol::channel::{Receiver, Sender};
 
-use crate::{geometry::pos2, model, tab, twitch, DisplayChannel, Tabs};
+use crate::{display_channel::DisplayChannel, geometry::pos2, model, tab, tabs::Tabs, twitch};
 
 #[derive(Debug, anathema::values::State)]
 pub struct RootState {
@@ -41,7 +41,7 @@ impl anathema::core::View for RootView {
                 anathema::core::KeyCode::Char(n) if modifiers == KeyModifiers::CONTROL => {
                     let old = self.tabs.active;
 
-                    if matches!(n, '0'..='9') {
+                    if n.is_ascii_digit() {
                         let index = (n as u8 - b'0').checked_sub(1).unwrap_or(9) as usize;
                         self.tabs.switch_to_channel(index, &mut self.state.channels);
                     }
@@ -101,7 +101,7 @@ impl anathema::core::View for RootView {
                             return anathema::core::Event::Stop;
                         }
 
-                        Command::Error { msg } => {
+                        Command::Error { msg: _ } => {
                             // we need a synthetic buffer to show these errors
                         }
 
