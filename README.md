@@ -1,6 +1,7 @@
 ## usage:
 
 ensure: `TWITCH_NAME="your_name_on_twitch"` is set
+
 ensure: `TWITCH_OAUTH="oauth:your_tmi_oauth_token"` is set
 
 run it.
@@ -23,5 +24,12 @@ run it.
 | ctrl-g   | move to previous buffer |
 
 ---
+
+<details>
+<summary>screenshot:</summary>
+
+![screenshot](./screenshot.png)
+
+</details>
 
 license: MIT
