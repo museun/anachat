@@ -18,7 +18,7 @@ dependencies = [
 [[package]]
 name = "anathema"
 version = "0.3.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "anathema-compiler",
  "anathema-render",
@@ -33,7 +33,7 @@ dependencies = [
 [[package]]
 name = "anathema-compiler"
 version = "0.1.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "anathema-render",
  "anathema-values",
@@ -43,7 +43,7 @@ dependencies = [
 [[package]]
 name = "anathema-render"
 version = "0.1.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "bitflags 2.4.1",
  "crossterm",
@@ -53,7 +53,7 @@ dependencies = [
 [[package]]
 name = "anathema-runtime"
 version = "0.1.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "anathema-render",
  "anathema-values",
@@ -67,7 +67,7 @@ dependencies = [
 [[package]]
 name = "anathema-value-derive"
 version = "0.1.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "manyhow",
  "quote",
@@ -78,7 +78,7 @@ dependencies = [
 [[package]]
 name = "anathema-values"
 version = "0.1.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "anathema-render",
  "anathema-value-derive",
@@ -89,7 +89,7 @@ dependencies = [
 [[package]]
 name = "anathema-vm"
 version = "0.1.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "anathema-compiler",
  "anathema-render",
@@ -102,7 +102,7 @@ dependencies = [
 [[package]]
 name = "anathema-widget-core"
 version = "0.1.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "anathema-render",
  "anathema-values",
@@ -117,7 +117,7 @@ dependencies = [
 [[package]]
 name = "anathema-widgets"
 version = "0.1.0"
-source = "git+https://github.com/museun/anathema?branch=stop-it#a69c43c79e7d179668e410b82c605483584fd938"
+source = "git+https://github.com/togglebyte/anathema.git?rev=f99a0c1c2821d2cd6f3f41b0517cf91949cafcef#f99a0c1c2821d2cd6f3f41b0517cf91949cafcef"
 dependencies = [
  "anathema-render",
  "anathema-values",

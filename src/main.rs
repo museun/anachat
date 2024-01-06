@@ -5,10 +5,7 @@ use std::{
     collections::{HashMap, HashSet, VecDeque},
     future::Future,
     hash::Hash,
-    sync::{
-        atomic::{AtomicBool, Ordering},
-        Arc, Mutex,
-    },
+    sync::{Arc, Mutex},
     task::Poll,
 };
 
@@ -791,7 +788,6 @@ struct RootView {
     tabs: Tabs,
     feed: Receiver<Response>,
     send: Sender<Request>,
-    stop: Arc<AtomicBool>,
 }
 
 impl RootView {
@@ -803,7 +799,11 @@ impl RootView {
 }
 
 impl anathema::core::View for RootView {
-    fn on_event(&mut self, event: anathema::core::Event, _: &mut anathema::core::Nodes<'_>) {
+    fn on_event(
+        &mut self,
+        event: anathema::core::Event,
+        _: &mut anathema::core::Nodes<'_>,
+    ) -> anathema::core::Event {
         match event {
             anathema::core::Event::KeyPress(code, modifiers, _) => match code {
                 anathema::core::KeyCode::Char(n) if modifiers == KeyModifiers::CONTROL => {
@@ -866,7 +866,7 @@ impl anathema::core::View for RootView {
                                 .send
                                 .send_blocking(Request::Disconnect { reconnect: false });
 
-                            self.stop.store(true, Ordering::SeqCst);
+                            return anathema::core::Event::Stop;
                         }
 
                         Command::Error { msg } => {
@@ -898,6 +898,8 @@ impl anathema::core::View for RootView {
             }
             _ => {}
         }
+
+        event
     }
 
     fn tick(&mut self) {
@@ -1161,19 +1163,28 @@ else if status == "invalid_auth"
 else if status == "on_no_channels"
     vstack
         expand
-            alignment [align: "center"]
-                vstack [height: 3]
-                    text "Connected to "
-                        span [foreground: #6441a5] "Twitch"
-                        span " as "
-                        span [foreground: our_user.color] our_user.name
-                        span " ("
-                        span our_user.user_id
-                        span ")"
-                    text " "
-                    text [text-align: "center"] "Type /join "
-                        span [text-align: "center", bold: true, italics: true] "#channel"
-                        span [text-align: "center"] " to join a channel"
+            alignment [align: "bottom-left"]
+                vstack
+                    spacer
+                    hstack
+                        spacer
+                        text "Connected to "
+                            span [foreground: #6441a5] "Twitch"
+                            span " as "
+                            span [foreground: our_user.color] our_user.name
+                            span " ("
+                            span our_user.user_id
+                            span ")"
+                        spacer
+
+                    hstack
+                        spacer
+                        text [text-align: "center"] "Type "
+                            span [background: #333] "/join "
+                            span [bold: true, italics: true, background: #333] "#channel"
+                            span " to join a channel"
+                        spacer
+                    spacer
 
         hstack [background: #222]
             text input
@@ -1218,7 +1229,6 @@ fn main() -> anyhow::Result<()> {
 
     let handle = std::thread::spawn(move || connect(config, req_rx, resp_tx));
 
-    let stop = Arc::new(AtomicBool::new(false));
     let root_view = RootView {
         state: RootState {
             status: StateValue::default(),
@@ -1230,7 +1240,6 @@ fn main() -> anyhow::Result<()> {
         tabs: Tabs::default(),
         feed: resp_rx,
         send: req_tx.clone(),
-        stop: Arc::clone(&stop),
     };
 
     let mut templates = anathema::vm::Templates::new(TEMPLATE.to_string(), root_view);
@@ -1238,7 +1247,6 @@ fn main() -> anyhow::Result<()> {
 
     let mut runtime = anathema::runtime::Runtime::new(&templates)?;
     runtime.enable_alt_screen = false;
-    runtime.stop = Some(Box::new(move || stop.load(Ordering::SeqCst)));
 
     runtime.run()?;
 

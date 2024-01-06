@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anathema = { git = "https://github.com/togglebyte/anathema.git", rev = "a85fdfa326061eced56cfb1aa3cd61c78cabc076" }
+anathema = { git = "https://github.com/togglebyte/anathema.git", rev = "f99a0c1c2821d2cd6f3f41b0517cf91949cafcef" }
 anyhow = "1.0.79"
 fastrand = "2.0.1"
 pin-project-lite = "0.2.13"
@@ -14,5 +14,5 @@ simple_env_load = "0.2.0"
 smol = "2.0.0"
 twitch_message = { version = "0.1.2", features = [ "std" ] }
 
-[patch."https://github.com/togglebyte/anathema.git"]
-anathema = { git = "https://github.com/museun/anathema", branch = "stop-it" }
+# [patch."https://github.com/togglebyte/anathema.git"]
+# anathema = { git = "https://github.com/museun/anathema", branch = "stop-it" }
