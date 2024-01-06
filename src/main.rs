@@ -1,8 +1,3 @@
-#![cfg_attr(debug_assertions, allow(dead_code, unused_variables,))]
-
-use anathema::values::{List, StateValue};
-use tabs::Tabs;
-
 mod channel;
 mod display_channel;
 mod geometry;
@@ -25,7 +20,7 @@ fn main() -> anyhow::Result<()> {
 
     let root_view = root_view::RootView {
         state: root_view::RootState::default(),
-        tabs: Tabs::default(),
+        tabs: tabs::Tabs::default(),
         feed: resp_rx,
         send: req_tx.clone(),
     };
