@@ -1,0 +1,78 @@
+if status == "connecting"
+    alignment [align: "center"]
+        text "Connecting to "
+            span [foreground: #6441a5] "Twitch"
+            span "."
+
+else if status == "reconnecting"
+    alignment [align: "center"]
+        text "Reconnecting to "
+            span [foreground: #6441a5] "Twitch"
+            span "... "
+            span "(our user: "
+            span [foreground: our_user.color] our_user.name
+            span ")"
+
+else if status == "invalid_auth"
+    alignment [align: "center"]
+        text "Invalid Authentication (check your "
+            span [foreground: #f00] "name"
+            span " and "
+            span [foreground: #f00] "oauth"
+            span ")"
+
+else if status == "on_no_channels"
+    vstack
+        expand
+            alignment [align: "bottom-left"]
+                vstack
+                    spacer
+                    hstack
+                        spacer
+                        text "Connected to "
+                            span [foreground: #6441a5] "Twitch"
+                            span " as "
+                            span [foreground: our_user.color] our_user.name
+                            span " ("
+                            span our_user.user_id
+                            span ")"
+                        spacer
+
+                    hstack
+                        spacer
+                        text [text-align: "center"] "Type "
+                            span [background: #333] "/join "
+                            span [bold: true, italics: true, background: #333] "#channel"
+                            span " to join a channel"
+                        spacer
+                    spacer
+
+        hstack [background: #222]
+            text input
+                span [foreground: #0aa] "█"
+            spacer
+
+else
+    vstack
+        expand
+            vstack
+                for msg in output
+                    hstack
+                        text
+                            span [foreground: msg.sender.color] msg.sender.name
+                            span " "
+                            span msg.data
+                        spacer
+
+
+        hstack [background: #000]
+            for channel in channels
+                hstack
+                    tab [foreground: channel.status] channel.name
+                    text " "
+            spacer
+
+        hstack [background: #222]
+            text input
+                span [foreground: #0aa] "█"
+            spacer
